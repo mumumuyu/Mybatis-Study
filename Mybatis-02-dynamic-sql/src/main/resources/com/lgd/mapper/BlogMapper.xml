@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.lgd.mapper.BlogMapper">
+    <insert id="addBlog" parameterType="blog">
+        insert into blog (id,title,author,create_time,views) values(#{id},#{title},#{author},#{createTime},#{views});
+    </insert>
+
+<!--    <select id="getBlogIF" parameterType="map" resultType="blog">-->
+<!--        select * from blog where title = #{title} and views = #{views};-->
+<!--    </select>-->
+
+    <select id="getBlogIF" parameterType="map" resultType="Blog">
+        select * from blog where 1 = 1
+        <include refid="if-title-author"></include>
+    </select>
+
+    <sql id="if-title-author">
+        <if test="title != null">
+            and title = #{title}
+        </if>
+        <if test="views!= null">
+            and views = #{views}
+        </if>
+    </sql>
+
+    <select id="getBlogChoose" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="views!=null">
+                    views = #{views}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateBlog" parameterType="map">
+        update blog
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="views != null">
+                views = #{views}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="getBlogForeach" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <foreach collection="ids" item="id" open="(" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>

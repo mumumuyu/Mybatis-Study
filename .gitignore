@@ -1,0 +1,3 @@
+# Project exclude paths
+/Mybatis-01-fzquery/target/
+/Mybatis-02-dynamic-sql/target/
