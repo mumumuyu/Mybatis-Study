@@ -11,5 +11,10 @@
         <module name="Mybatis-02-dynamic-sql" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mybatis-generatorTest" target="8" />
+      <module name="test-01" target="8" />
+      <module name="test-02" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

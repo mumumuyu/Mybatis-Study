@@ -11,6 +11,9 @@
     <modules>
         <module>Mybatis-01-fzquery</module>
         <module>Mybatis-02-dynamic-sql</module>
+        <module>test-01</module>
+        <module>test-02</module>
+        <module>mybatis-generatorTest</module>
     </modules>
 
     <properties>
